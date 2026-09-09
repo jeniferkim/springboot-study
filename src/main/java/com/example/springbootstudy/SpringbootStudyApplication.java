@@ -3,6 +3,8 @@ package com.example.springbootstudy;
 
 import com.example.springbootstudy.savedroute.SavedRoute;
 import com.example.springbootstudy.savedroute.SavedRouteRepository;
+import com.example.springbootstudy.user.User;
+import com.example.springbootstudy.user.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,15 +20,20 @@ public class SpringbootStudyApplication {
 
     @Bean
     CommandLineRunner init( // CommandLineRunner 스프링부트가 실행 직후 한번 실행되는 코드
-            SavedRouteRepository savedRouteRepository
+                            UserRepository userRepository,
+                            SavedRouteRepository savedRouteRepository
     ) {
         return args -> {
-            savedRouteRepository.save(
-                    new SavedRoute("Busan Route", 10000)
+            User user = userRepository.save(
+                    new User("test@example.com")
             );
 
             savedRouteRepository.save(
-                    new SavedRoute("Seoul Route", 15000)
+                    new SavedRoute("Busan Route", 10000, user)
+            );
+
+            savedRouteRepository.save(
+                    new SavedRoute("Seoul Route", 15000, user)
             );
         };
     }

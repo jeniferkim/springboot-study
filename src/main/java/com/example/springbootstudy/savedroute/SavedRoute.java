@@ -1,9 +1,7 @@
 package com.example.springbootstudy.savedroute;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.springbootstudy.user.User;
+import jakarta.persistence.*;
 
 @Entity // 이 클래스는 DB와 연결해서 관리할 Entity야
 public class SavedRoute {
@@ -20,9 +18,10 @@ public class SavedRoute {
     }
 
     // 이건 데이터 직접 생성하기 위한 생성자
-    public SavedRoute(String title, Integer savingAmount) {
+    public SavedRoute(String title, Integer savingAmount, User user) {
         this.title = title;
         this.savingAmount = savingAmount;
+        this.user = user;
     }
 
     public Long getId() {
@@ -36,4 +35,12 @@ public class SavedRoute {
     public Integer getSavingAmount() {
         return savingAmount;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
