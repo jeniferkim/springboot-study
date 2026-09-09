@@ -1,8 +1,12 @@
 // main.ts
 package com.example.springbootstudy;
 
+import com.example.springbootstudy.savedroute.SavedRoute;
+import com.example.springbootstudy.savedroute.SavedRouteRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication // 앱의 시작점
 public class SpringbootStudyApplication {
@@ -12,4 +16,18 @@ public class SpringbootStudyApplication {
         SpringApplication.run(SpringbootStudyApplication.class, args);
     }
 
+    @Bean
+    CommandLineRunner init( // CommandLineRunner 스프링부트가 실행 직후 한번 실행되는 코드
+            SavedRouteRepository savedRouteRepository
+    ) {
+        return args -> {
+            savedRouteRepository.save(
+                    new SavedRoute("Busan Route", 10000)
+            );
+
+            savedRouteRepository.save(
+                    new SavedRoute("Seoul Route", 15000)
+            );
+        };
+    }
 }

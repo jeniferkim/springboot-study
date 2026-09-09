@@ -16,7 +16,7 @@ public class SavedRouteController {
     }
 
     @GetMapping
-    public List<String> getSavedRoutes() {
+    public List<SavedRoute> getSavedRoutes() {
         return savedRouteService.findAll();
     }
 }
