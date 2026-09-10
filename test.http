@@ -15,3 +15,27 @@ Content-Type: application/json
 "title": "",
 "savingAmount": -1000
 }
+
+###
+
+POST http://localhost:8080/saved-routes
+Content-Type: application/json
+
+{
+  "title": "Jeju Route",
+  "savingAmount": 20000
+}
+
+###
+
+POST http://localhost:8080/saved-routes
+Content-Type: application/json
+
+{
+  "title": "ERROR",
+  "savingAmount": 20000
+}
+
+###
+
+GET http://localhost:8080/saved-routes

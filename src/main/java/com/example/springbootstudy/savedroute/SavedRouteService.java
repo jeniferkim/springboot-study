@@ -5,6 +5,7 @@ import com.example.springbootstudy.savedroute.dto.SavedRouteResponse;
 import com.example.springbootstudy.savedroute.exception.SavedRouteNotFoundException;
 import com.example.springbootstudy.user.User;
 import com.example.springbootstudy.user.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class SavedRouteService {
         this.userRepository = userRepository;
     }
 
+    @Transactional(readOnly=true)
     public List<SavedRouteResponse> findAll() {
         return savedRouteRepository.findAll()
                 .stream()
@@ -49,6 +51,7 @@ public class SavedRouteService {
         );
     }
 
+    @Transactional
     public SavedRouteResponse create(
             CreateSavedRouteRequest request
     ) {
@@ -62,6 +65,10 @@ public class SavedRouteService {
         );
 
         SavedRoute saved = savedRouteRepository.save(savedRoute);
+
+        if (request.getTitle().equals("ERROR")) {
+            throw new RuntimeException("transaction test");
+        }
 
         return new SavedRouteResponse(
                 saved.getId(),
