@@ -1,8 +1,9 @@
 package com.example.springbootstudy.savedroute;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.springbootstudy.savedroute.dto.CreateSavedRouteRequest;
+import com.example.springbootstudy.savedroute.dto.SavedRouteResponse;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +17,14 @@ public class SavedRouteController {
     }
 
     @GetMapping
-    public List<SavedRoute> getSavedRoutes() {
+    public List<SavedRouteResponse> getSavedRoutes() {
         return savedRouteService.findAll();
+    }
+
+    @PostMapping
+    public SavedRouteResponse create(
+            @Valid @RequestBody CreateSavedRouteRequest request
+    ) {
+        return savedRouteService.create(request);
     }
 }
