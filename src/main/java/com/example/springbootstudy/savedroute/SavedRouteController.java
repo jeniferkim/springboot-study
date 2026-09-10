@@ -21,6 +21,13 @@ public class SavedRouteController {
         return savedRouteService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public SavedRouteResponse getSavedRoute(
+            @PathVariable Long id // URL의 값을 Java 변수로 받는 것
+    ) {
+        return savedRouteService.findById(id);
+    }
+
     @PostMapping
     public SavedRouteResponse create(
             @Valid @RequestBody CreateSavedRouteRequest request

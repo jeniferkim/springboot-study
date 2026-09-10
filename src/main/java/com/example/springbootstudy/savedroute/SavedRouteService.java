@@ -2,6 +2,7 @@ package com.example.springbootstudy.savedroute;
 
 import com.example.springbootstudy.savedroute.dto.CreateSavedRouteRequest;
 import com.example.springbootstudy.savedroute.dto.SavedRouteResponse;
+import com.example.springbootstudy.savedroute.exception.SavedRouteNotFoundException;
 import com.example.springbootstudy.user.User;
 import com.example.springbootstudy.user.UserRepository;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,20 @@ public class SavedRouteService {
                         )
                 )
                 .toList();
+    }
+
+    public SavedRouteResponse findById(Long id) {
+
+        SavedRoute savedRoute = savedRouteRepository.findById(id)
+                .orElseThrow(
+                        () -> new SavedRouteNotFoundException(id)
+                );
+
+        return new SavedRouteResponse(
+                savedRoute.getId(),
+                savedRoute.getTitle(),
+                savedRoute.getSavingAmount()
+        );
     }
 
     public SavedRouteResponse create(
