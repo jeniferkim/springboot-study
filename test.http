@@ -39,3 +39,16 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8080/saved-routes
+
+###
+
+PATCH http://localhost:8080/saved-routes/1
+Content-Type: application/json
+
+{
+  "title": "Updated Busan Route"
+}
+
+###
+
+GET http://localhost:8080/saved-routes/1

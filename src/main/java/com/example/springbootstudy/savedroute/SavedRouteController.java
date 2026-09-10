@@ -2,6 +2,7 @@ package com.example.springbootstudy.savedroute;
 
 import com.example.springbootstudy.savedroute.dto.CreateSavedRouteRequest;
 import com.example.springbootstudy.savedroute.dto.SavedRouteResponse;
+import com.example.springbootstudy.savedroute.dto.UpdateSavedRouteRequest;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,14 @@ public class SavedRouteController {
             @PathVariable Long id // URL의 값을 Java 변수로 받는 것
     ) {
         return savedRouteService.findById(id);
+    }
+
+    @PatchMapping("/{id}")
+    public SavedRouteResponse updateSavedRoute(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateSavedRouteRequest request
+    ) {
+        return savedRouteService.update(id, request);
     }
 
     @PostMapping

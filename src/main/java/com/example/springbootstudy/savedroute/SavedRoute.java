@@ -36,6 +36,11 @@ public class SavedRoute {
         return savingAmount;
     }
 
+    // 얘는 setter처럼 값을 바꾸는 역할을 하지만 setTitle보다 의미 있는 이름을 쓴 것임
+    public void changeTitle(String title) {
+        this.title = title;
+    }
+
     public User getUser() {
         return user;
     }
